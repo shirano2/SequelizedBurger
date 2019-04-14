@@ -1,0 +1,64 @@
+<div id="wrapper">
+  <img src="/assets/img/burger.png" alt="burger.png">
+  <h1>Eat-Da-Burger!</h1>
+  <!-- show the whole burgers -->
+  <div id="toEat">
+      <h2>Table</h2>
+      <ul>
+      {{#each burgers}}
+          {{#unless devoured}}
+          <li><input type="text" value="{{burger_name}}" readonly>
+          <button data-id="{{id}}">Devour it!</button></li>
+          {{/unless}}
+      {{/each}}
+      </ul>
+  </div>
+  <div id="alreadyEaten">
+      <h2>Trash Bin</h2>
+      <ul>
+      {{#each burgers}}
+          {{#if devoured}}
+          <li><input type="text" value="{{burger_name}}" class="devoured" readonly></li> 
+          {{/if}}
+      {{/each}}
+      </ul>
+  </div>
+
+  <!-- order a new burger -->
+  <form>
+      <textarea type="text" name="burger"></textarea> 
+      <input type="submit" id="submit" value="Order">
+      <h4>Enter a burger you want to eat Click the "Submit" button</h4>
+  </form>
+</div>
+
+<script>
+$(function() {
+    /* when ordering a new burger */
+  $("#submit").on("click", function(e) {
+    e.preventDefault();
+    $.ajax("/api/burgers/", {
+      type: "POST",
+      data: {burger_name:$("[name=burger]").val().trim()}
+    }).then(
+      function() {
+        console.log("making a new burger");
+        location.reload();
+      }
+    );
+  });
+
+  /* when eating a burger */  
+  $("button").on("click", function() {
+    var id = $(this).data("id");
+    $.ajax("/api/burgers/" + id, {
+      type: "PUT",
+    }).then(
+      function() {
+        console.log("I'm eating");
+        location.reload();
+      }
+    );
+  });
+});
+</script>
