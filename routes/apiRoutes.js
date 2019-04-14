@@ -20,9 +20,7 @@ router.put("/api/burgers/:id", function(req, res) {
                 });
             });
         } else {
-            db.Burger.update({CustomerId:data[0].id,devoured:true},{where:{id:req.params.id}}).then(function(data){
-                res.json({data:data});
-            });
+            res.json(false);
         }
     });
 });

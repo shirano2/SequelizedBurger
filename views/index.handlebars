@@ -35,7 +35,14 @@
 
 <script>
 $(function() {
-    /* when ordering a new burger */
+  var thisPrev;
+
+  /* When customer input is blur */
+  $("#customer").on("blur", function(){
+    $(this).attr("placeholder","Customer?");
+  });
+
+  /* when ordering a new burger */
   $("#submit").on("click", function(e) {
     e.preventDefault();
     $.ajax("/api/burgers/", {
@@ -52,16 +59,21 @@ $(function() {
   /* when eating a burger */  
   $("button").on("click", function() {
     if($(this).prev().val()=="") {
-      return $(this).prev().focus();
+      return $(this).prev().attr("placeholder","Please insert customer name!!").focus();
     }
+    thisPrev=$(this).prev();
     var id = $(this).data("id");
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
       data:{customer:$(this).prev().val()}
     }).then(
-      function() {
-        console.log("I'm eating");
-        location.reload();
+      function(data) {
+        if(data) {
+          console.log("I'm eating");
+          location.reload();
+        } else {
+          thisPrev.attr("placeholder","1 burger per 1 customer! Sorry!").val("").focus();
+        }
       }
     );
   });
