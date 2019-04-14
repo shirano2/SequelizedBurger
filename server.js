@@ -25,7 +25,7 @@ var apiRoutes = require("./routes/apiRoutes.js");
 app.use(apiRoutes);
 
 /* listener */
-db.sequelize.sync({force:false}).then(function(){
+db.sequelize.sync({force:true}).then(function(){
   app.listen(PORT, function() {
     console.log("Micheal, Can you hear me? I'm in",PORT,"port, please come here.... (Mute)");
   });

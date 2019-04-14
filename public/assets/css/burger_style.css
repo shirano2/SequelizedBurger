@@ -88,6 +88,8 @@ li {
 }
 
 button {
+    display:block;
+    margin:0 auto;
     background-color: #ee432e;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee432e), color-stop(50%, #c63929), color-stop(50%, #b51700), color-stop(100%, #891100));
     background-image: -webkit-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);

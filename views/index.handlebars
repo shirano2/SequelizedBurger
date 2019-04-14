@@ -7,7 +7,8 @@
       <ul>
       {{#each burgers}}
           {{#unless devoured}}
-          <li><input type="text" value="{{burger_name}}" readonly>
+          <li><input type="text" value="{{id}}. {{burger_name}}" readonly>
+          <input type="text" placeholder="Customer?">
           <button data-id="{{id}}">Devour it!</button></li>
           {{/unless}}
       {{/each}}
@@ -18,7 +19,7 @@
       <ul>
       {{#each burgers}}
           {{#if devoured}}
-          <li><input type="text" value="{{burger_name}}" class="devoured" readonly></li> 
+          <li><input type="text" value="{{id}}. {{burger_name}} (Eaten by {{Customer.customer_name}})" class="devoured" readonly></li> 
           {{/if}}
       {{/each}}
       </ul>
@@ -50,9 +51,13 @@ $(function() {
 
   /* when eating a burger */  
   $("button").on("click", function() {
+    if($(this).prev().val()=="") {
+      return;
+    }
     var id = $(this).data("id");
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
+      data:{customer:$(this).prev().val()}
     }).then(
       function() {
         console.log("I'm eating");

@@ -12,8 +12,18 @@ router.post("/api/burgers", function(req, res) {
 
 /* route for eating (after clicking the Devour button) */
 router.put("/api/burgers/:id", function(req, res) {
-    db.Burger.update({devoured:true},{where:{id:req.params.id}}).then(function(data){
-        res.json({data: data});
+    db.Customer.findAll({where:{customer_name:req.body.customer}}).then(function(data){
+        if(data.length==0) {
+            db.Customer.create({customer_name:req.body.customer}).then(function(data){
+                db.Burger.update({CustomerId:data.id,devoured:true},{where:{id:req.params.id}}).then(function(data){
+                    res.json({data:data});
+                });
+            });
+        } else {
+            db.Burger.update({CustomerId:data[0].id,devoured:true},{where:{id:req.params.id}}).then(function(data){
+                res.json({data:data});
+            });
+        }
     });
 });
 
