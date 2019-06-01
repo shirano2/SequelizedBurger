@@ -76,7 +76,7 @@ module.exports=function(sequelize, DataTypes) {
 };
 ```
 
-### Route
+### Route & Sequelize
 
 #### Menu
 
