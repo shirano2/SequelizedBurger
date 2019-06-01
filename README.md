@@ -21,7 +21,7 @@ https://sequelizedburger-17636.herokuapp.com/
 
 * HTML5
 * CSS3
-* jQuery
+* JQuery
 * Javascript
 * MySQL
 * Node.js
