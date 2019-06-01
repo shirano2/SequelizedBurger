@@ -23,9 +23,9 @@ https://sequelizedburger-17636.herokuapp.com/
 * CSS3
 * jQuery
 * Javascript
-* Node.JS
+* Node.js
 * MySQL
-* express, express-handlebars, mysql, sequelize
+* express, express-handlebars, sequelize, sequelize-cli
 
 
 ### DB Models & Association
