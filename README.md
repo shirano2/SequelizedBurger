@@ -23,8 +23,8 @@ https://sequelizedburger-17636.herokuapp.com/
 * CSS3
 * jQuery
 * Javascript
-* Node.js
 * MySQL
+* Node.js
 * express, express-handlebars, sequelize, sequelize-cli
 
 
